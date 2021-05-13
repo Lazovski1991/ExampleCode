@@ -1,0 +1,24 @@
+sudo -u postgres psql			                                войти в постгрес
+psql test_db					                                перейти в бд 
+\l								                                список бд
+passwd postgres                                                 ввести пароль для пользователя postgres
+sudo su postgres                                                войти под пользователем postgres
+psql                                                            запускаем утилиту psql – это консоль для PostgreSQL.
+create user mick with password 'mick';                          создание нового пользователя
+create database test_db;                                        создание базы данных
+grant all privileges on database test_db to info_comp;          дать права на управление базой данных новому пользователю.
+\q                                                              выходим из консоли.
+psql -h localhost test_db info_comp                             подключится к PostgreSQL от имени нового пользователя
+exit                                                            переключенияе обратно на root,
+DROP DATABASE test_db;                                          удалить бд
+
+
+
+
+УСТАНОВКА
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+sudo -i -u postgres
+psql
+
+

@@ -1,0 +1,76 @@
+CREATE TABLE book (
+  book_id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(50),
+  author VARCHAR(30),
+  price DECIMAL(8.2),
+  amount INT
+);
+
+
+CREATE TABLE book (
+    book_id INT PRIMARY KEY AUTO_INCREMENT, 
+    title VARCHAR(50), 
+    author_id INT NOT NULL, 
+    price DECIMAL(8,2), 
+    amount INT, 
+    FOREIGN KEY (author_id)  REFERENCES author (author_id) ON DELETE CASCADE 
+);
+
+
+INSERT INTO book(title, author, price, amount)
+VALUES ("Белая гвардия", "Булгаков М.А.",540.50, 5),
+("Идиот", "Достоевский Ф.М.",460.00, 10),
+("Братья Карамазовы", "Достоевский Ф.М.",799.01, 2);
+SELECT * FROM book;
+
+
+SELECT * FROM book;
+
+
+SELECT author, title, price FROM book;
+
+
+SELECT title AS Название, author AS Автор FROM book;
+
+SELECT title, amount, amount * 1.65 AS pack FROM book;
+
+SELECT title, author, amount, ROUND(price-0.3*price, 2) AS new_price FROM book;
+
+SELECT author, title, price FROM book WHERE amount<10;
+
+SELECT title, author, price, amount FROM book WHERE (price <500 OR price>600) AND price*amount>=5000;
+
+SELECT title, author FROM book WHERE price BETWEEN 540.50 AND 800 AND amount IN (2,3,5,7);
+
+SELECT amount FROM book GROUP BY amount;
+
+SELECT author, MIN(price) AS Минимальная_цена, MAX(price) AS Максимальная_цена, AVG(price) AS Средняя_цена FROM book GROUP BY author;
+
+SELECT title, name_author
+FROM 
+    author INNER JOIN book
+    ON author.author_id = book.author_id;
+
+
+SELECT title, name_genre, price
+FROM book INNER JOIN author INNER JOIN genre
+ON author.author_id = book.author_id AND genre.genre_id=book.genre_id
+AND book.amount>8 ORDER BY price DESC;  
+
+
+SELECT name_genre, title, name_author
+    FROM genre INNER JOIN book
+    ON genre.genre_id = book.genre_id
+    INNER JOIN author 
+    ON book.author_id = author.author_id
+    WHERE genre.name_genre IN ("роман") ORDER BY title;
+
+
+SELECT name_author, SUM(amount) AS Количество
+FROM book RIGHT JOIN author
+ON author.author_id = book.author_id
+GROUP BY name_author
+HAVING SUM(amount) BETWEEN 0 AND 10
+OR COUNT(title) = 0
+ORDER BY COUNT(title);
+

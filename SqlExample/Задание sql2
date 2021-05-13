@@ -1,0 +1,30 @@
+CREATE TABLE clients(id NUMBER, name VARCHAR2(1024), street_id NUMBER);
+
+clients:
+id | name | street_id
+-----------------------------------
+1 | Вася | 10
+2 | Петя | 11
+3 | Маша | 10
+4 | Коля | 12
+5 | Юля | null
+6 | Лена | 10
+
+Вывести всех клиентов, у которых есть сосед по улице.
+Т.е.:
+id | name | street_id
+-----------------------------------
+1 | Вася | 10
+3 | Маша | 10
+6 | Лена | 10
+
+
+
+
+select *
+from clients
+where street_id IN (
+SELECT street_id
+FROM clients
+GROUP BY street_id
+HAVING count(street_id) > 1);

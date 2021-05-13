@@ -1,0 +1,13 @@
+SELECT client_name
+FROM client
+         INNER JOIN orders ON client.client_id = orders.client_id
+WHERE order_id IN (SELECT order_id
+                   FROM items
+                            INNER JOIN orders_items on items.item_id = orders_items.item_id
+                   WHERE item_name = 'abc')
+GROUP BY client_name
+HAVING client_name IN (SELECT client_name AS sum_price
+                       FROM client
+                                INNER JOIN orders ON client.client_id = orders.client_id
+                       GROUP BY client_name
+                       HAVING sum(order_price) > 300);

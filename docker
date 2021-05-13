@@ -1,0 +1,26 @@
+docker rm swagger удалить контейнер
+docker rm $(docker ps -qa) удалить все контейнеры
+docker stop swagger остановить контейнер
+docker ps список запущенных контейнеров
+docker ps -a список всех контейнеров
+docker images cписок образов
+docker rmi nginx удалить образ
+docker kill «убивает» контейнер
+docker build -t hello world .    создать образ из докер файла
+docker volume ls список volumes
+docker volume create web создать volume
+docker run -p 80:8080 swaggerapi/swagger-ui запустить swagger
+docker run --name web -p 8080:8080 hello-world пробрасывать из контенера порт 8080
+docker run --name web -p 8080:8080 -e TZ=Europe/Moskow hello-world задать при запуске переменную окружения
+docker run --name web -p 8080:8080 -e TZ=Europe/Moskow -v /путь локальный:/путь в контейнере hello-world связывает локальные ресурсы с контейнером
+docker run --name web -p 8080:8080 -e TZ=Europe/Moskow -v web:/путь в контейнере/resources hello-world сохраняет все данные в volume
+docker run --name swagger_name -d swaggerapi/swagger-ui:latest  запустить в именем в detaich mode
+docker run --name swagger_name -d --rm swaggerapi/swagger-ui:latest  запустить в именем в detaich mode и удалить контейнер после завершения работы
+docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+docker push имя/имя проета запушить образ в докерхаб
+docker login залогинится в докерхаб
+
+
+
+
+

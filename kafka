@@ -1,0 +1,5 @@
+cd /opt/zookeeper
+sudo bin/zkServer.sh start
+
+
+sudo /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties

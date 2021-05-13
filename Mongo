@@ -1,0 +1,80 @@
+sudo mongod
+mongo --host localhost:27017
+
+use testDb                                                          создаем БД или переходим если она существует
+db.createCollection("users")                                        создаем коллекцию (таблицу)
+db.users.drop()                                                     удаляем коллекцию
+
+db.users.insertOne({"name" : "John" , "email" : "aaa@n.ru"})        вставка записи в коллекцию users
+db.users.insertMany([{"name" : "John" , "email" : "aaa@n.ru"},...]) вставка нескольких записей в коллекцию users
+
+db.users.find()                                                     выбрать все записи из коллекции
+db.users.find().limit(2)                                            выбрать 2 записи из коллекции
+db.users.find({}, {_id:0})                                          выбрать все записи из коллекции но не показывать id
+db.users.find().sort({age:1})                                       выбрать все записи из коллекции отсортировать по возрастанию (.sort({age:-1}) по убыв.) по полю age
+db.users.find().sort({age:1, name:1})                               выбрать все записи из коллекции отсортировать c дополнительным полем сортировки
+db.users.find({age:22}, {})                                         выбрать всех пользователей с возврастом 22
+db.users.find({age:22, name:"John"}, {})                            выбрать всех пользователей с возврастом 22 И именем John
+db.users.find({$or:[{age:22}, {name:"John"}]}, {})                  выбрать всех пользователей с возврастом 22 ИЛИ именем John
+db.users.find({$or:[{age:{$lt:22}}, {name:"John"}]}, {})            выбрать всех пользователей с возврастом МЕНЬШЕ 22 ИЛИ именем John
+db.users.find({$or:[{age:{$gt:22}}, {name:"John"}]}, {})            выбрать всех пользователей с возврастом БОЛЬШЕ 22 ИЛИ именем John
+db.users.find({$or:[{age:{$gte:22}}, {name:"John"}]}, {})           выбрать всех пользователей с возврастом БОЛЬШЕ либо РАВНЫМ 22 ИЛИ именем John
+db.users.find({$or:[{age:{$eq:22}}, {name:"John"}]}, {})            выбрать всех пользователей с возврастом РАВНЫМ 22 ИЛИ именем John
+db.users.find({$or:[{age:{$ne:22}}, {name:"John"}]}, {})            выбрать всех пользователей с возврастом НЕ РАВНЫМ 22 ИЛИ именем John
+db.users.find({name: {$in:["John", "Bob", "Jack"]}}, {})            выбрать всех пользователей с именами John, Bob, Jack
+db.users.find({name: {$nin:["John", "Bob", "Jack"]}}, {})           выбрать всех пользователей с именами НЕ John, Bob, Jack
+db.users.find({child : {$exists: true}}, {})                        выбрать всех пользователей у которых ЕСТЬ(true) поле child
+db.users.find({favcolors : {$size: 2}}, {})                         выбрать всех пользователей у которых в массиве favcolors 2 элемента
+db.users.find({"favcolors.1" : "Red"}, {})                          выбрать всех пользователей у которых в массиве favcolors 1 элемент равен Red
+db.users.find({favcolors : {$elemMatch: {$gte : "a"}}}, {})         выбрать всех пользователей у которых в массиве favcolors элементы больше "a"
+
+db.users.updateOne({name:"John"}, {$set: {name:"Bob"}})             изменить ОДИН объект с именем John на Bob
+db.users.updateMany({name:"John"}, {$set: {name:"Bob"}})            изменить ВСЕ объекты где есть имя John на Bob
+db.users.updateMany({name:"John"}, {$set: {age:25, email:"t@m.ru"}})изменить у всех объектов с именем John поля age и email
+
+db.users.replaceOne({name : "Bob"}, {name :"Jorge", age:22})        заменить ОДИН объект с именем Bob на НОВЫЙ объект с новыми полями
+
+db.users.deleteOne({age:{$gt:22}, age:{$lt:38}})                    удалить одну запись с age >22 и age<38
+db.users.deleteMany({age:{$gt:22}, age:{$lt:38}})                   удалить все записи с age >22 и age<38
+
+db.atticles.createIndex({title : "text", anons :"text"})            создание индекса для возможности поиска по тексту в полях title и anons
+db.atticles.find({$text : {$search : "слово"}})                     поиск слова в индексах и выборка всех объектов с этим словом (можно через пробел несколько слов)
+db.atticles.find({$text : {$search : "слово"}}, {score:{$meta:"textScore"}})    поиск слова в индексах и выборка всех объектов с этим словом о коэффициетом совпадения
+db.atticles.find({$text : {$search : "слово"}}, {score:{$meta:"textScore"}}).sort({score:{$meta:"textScore"}})   тоже только с сортировкой по совпадению
+
+db.users.count({age : 11})                                          вывести количество пользователей с возрастом 22
+db.users.distinct("name")                                           вывести все уникальные имена
+
+
+ГРУППИРОВКА по именам,
+db.users.aggregate([
+{$match:{name:"Mike"}},
+{$group:{_id:"$name", age: {$sum:"age"}}}
+])
+
+ОБЪЕДЕНЕННЫЙ ЗАПРОС,
+db.users.bulkWrite([
+    {
+        insertOne:{
+            "document" : {name:"Rob", age:55}
+        }
+    },
+    {
+        deleteOne:{
+            filter : {age : 22}
+        }
+    },
+    {
+        updateOne:{
+            filter : {name : "Rob"},
+            update : {$set : {email: "newEmail@n.ru"}}
+        }
+    },
+    {
+        replaceOne:{
+            filter : {name : "Rob"},
+            replacement : {name : "John"}
+        }
+    }
+])
+
