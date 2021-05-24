@@ -21,6 +21,9 @@ docker push имя/имя проета запушить образ в докер
 docker login залогинится в докерхаб
 
 
+Java 14. Cтавим командой sudo apt install openjdk-14-jdk. Аналогично подтягиваем сорцы командой sudo apt-get install openjdk-14-source. Если вдруг пакет не найден, то возможно стоит подключить репозиторий sudo add-apt-repository ppa:openjdk-r/ppa
+
+
 
 
 
