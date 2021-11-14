@@ -1,0 +1,47 @@
+gcloud init
+gcloud services enable container.googleapis.com
+gcloud container clusters create cluster-first
+gcloud container clusters create cluster-first --num-nodes=2
+gcloud container clusters delete cluster-first
+gcloud container clusters get-credentials cluster-first
+
+kubectl cluster-info                                                            информация о кластере
+kubectl get componentstatuses
+kubectl get nodes                                                               получить список нод на кластере
+kubectl apply -f pod-test.yaml                                                  запустить манифест файл
+kubectl delete -f pod-test.yaml                                                 удалить 
+kubectl describe nodes
+
+kubectl get pods                                                                получить список под на кластере
+kubectl run test --image=nelson9291/k8s-example:latest --port=8080              запустить под
+kubectl delete pods test                                                        удалить под
+kubectl describe pods test                                                      информация о поде
+kubectl exec -it test sh                                                        зайти в sh на поде
+kubeclt logs test                                                               посмотреть логи на поде
+kubeclt port-forward test 8080:8080                                             пробросить порт поды на локальный
+
+kubectl get deploy                                                              получить все деплойменте на кластере
+kubectl create deployment test-deploy --image nelson9291/k8s-example:latest     создаем деплоймент
+kubectl delete deploy test-deploy                                               удаляем деплоймент
+kubectl delete deployment --all                                                 удаляем все деплойменты
+kubectl describe deployments test-deploy                                        информация о деплойменте
+kubectl scale deployment test-deploy --replicas 4                               запускаем скелер, т.е. задаем число копий под
+kubectl get rs                                                                  информация replicas scaler
+kubectl autoscale deployment test-deploy --min=4 --max=6 --cpu-percent=80       запускаем автоскелер, которые решает сколько копий под держать
+kubectl get hpa                                                                 информация horizontal autoscaler
+kubectl rollout history deployment/test-deploy                                  история изменений в деплоймент
+kubectl rollout status deployment/test-deploy                                   текущий статус деплоймента
+kubectl set image deployment/test-deploy k8s-example=k8s-example:1.0 --record   заменить image в подах
+kubectl rollout undo deployment/test-deploy                                     откатить на предыдущую версию
+kubectl rollout restart deployment/test-deploy                                  перезалить образ(если допустим мы все время обнолвем версию latest)
+kubectl get hpa                                                                 показать все HorizontalAutoScalers
+
+kubectl get svc                                                                 получить сервисы
+kubectl expose deployment test-deploy --type=ClusterIP --port 8080              создать сервис
+kubectl expose deployment test-deploy --type=LoadBalancer --port 8080           создать сервис 
+kubectl delete service test-deploy                                              удалить сервис
+
+helm list
+helm install app helm/
+helm install app helm/ --set container.image=nelson9291/k8s-example:latest --set replicaCount=3
+helm upgrade app helm/ --set container.image=nelson9291/k8s-example:latest --set replicaCount=4
