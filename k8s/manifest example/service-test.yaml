@@ -18,9 +18,12 @@ spec:
     spec:
       containers:
         - name: asshole
-          image: nelson9291/k8s-example:latest
+          image: nelson9291/k8s-example:1.2
           ports:
             - containerPort: 8080
+          env:
+            - name: NAMED
+              value: friends
 
 ---
 apiVersion: autoscaling/v2beta2
