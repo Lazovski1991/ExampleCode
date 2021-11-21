@@ -51,4 +51,6 @@ kubectl get ingress
 kubectl describe ingress
 kubectl get services -o wide
 
-kubectl create namespace devops-platform
+kubectl get namespaces
+kubectl create namespace test-namespace
+kubectl describe namespaces test-namespace
