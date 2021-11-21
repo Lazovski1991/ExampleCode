@@ -50,3 +50,5 @@ kubectl get svc -n projectcontour
 kubectl get ingress
 kubectl describe ingress
 kubectl get services -o wide
+
+kubectl create serviceaccount example-sa --namespace mynamespace
