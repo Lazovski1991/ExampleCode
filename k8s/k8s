@@ -45,3 +45,8 @@ helm list
 helm install app helm/
 helm install app helm/ --set container.image=nelson9291/k8s-example:latest --set replicaCount=3
 helm upgrade app helm/ --set container.image=nelson9291/k8s-example:latest --set replicaCount=4
+
+kubectl get svc -n projectcontour
+kubectl get ingress
+kubectl describe ingress
+kubectl get services -o wide
