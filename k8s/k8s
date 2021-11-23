@@ -50,6 +50,7 @@ kubectl get svc -n projectcontour
 kubectl get ingress
 kubectl describe ingress
 kubectl get services -o wide
+kubectl get services -o wide --namespace=ingress-nginx
 
 kubectl get namespaces
 kubectl create namespace test-namespace
