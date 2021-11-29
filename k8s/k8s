@@ -55,3 +55,5 @@ kubectl get services -o wide --namespace=ingress-nginx
 kubectl get namespaces
 kubectl create namespace test-namespace
 kubectl describe namespaces test-namespace
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
