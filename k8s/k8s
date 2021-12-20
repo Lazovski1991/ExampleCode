@@ -41,6 +41,8 @@ kubectl expose deployment test-deploy --type=ClusterIP --port 8080              
 kubectl expose deployment test-deploy --type=LoadBalancer --port 8080           создать сервис 
 kubectl delete service test-deploy                                              удалить сервис
 
+kubectl get pvc
+
 helm list
 helm install app helm/
 helm install app helm/ --set container.image=nelson9291/k8s-example:latest --set replicaCount=3
