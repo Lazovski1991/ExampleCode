@@ -64,3 +64,6 @@ git commit --amend -m "Новое название"  изменение назв
 
 git cherry-pick <идентификатор коммита> перенести коммит на текущую ветку
 
+git tag -a 5.0 создать тэг
+git push --tags запушить все локальные тэги
+git ls-remote --tags --refs origin | cut -f2 | xargs git push origin --delete удалить все тэги
