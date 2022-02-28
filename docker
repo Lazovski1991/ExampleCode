@@ -28,5 +28,6 @@ Java 14. Cтавим командой sudo apt install openjdk-14-jdk. Анал�
 
 docker run -it --rm --name rabbitmq -d -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 docker run --name swagger_name -d --rm swaggerapi/swagger-ui:latest 
+docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk (если падает попробовать sudo sysctl -w vm.max_map_count=262144)
 
 
