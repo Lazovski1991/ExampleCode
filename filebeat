@@ -1,0 +1,8 @@
+sudo service filebeat start запуск
+sudo service filebeat stop остановка
+systemctl status filebeat статус
+journalctl -u filebeat.service логи 
+
+если будут проблемы с правами на чтение файлов
+sudo chown root ./filebeat/filebeat.yml
+sudo chmod go-w ./filebeat/filebeat.yml
