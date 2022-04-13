@@ -19,6 +19,7 @@ kubectl describe pods test                                                      
 kubectl exec -it test sh                                                        зайти в sh на поде
 kubeclt logs test                                                               посмотреть логи на поде
 kubeclt port-forward test 8080:8080                                             пробросить порт поды на локальный
+kubectl get nodes -o wide                                                       адреса нод
 
 kubectl get deploy                                                              получить все деплойменте на кластере
 kubectl create deployment test-deploy --image nelson9291/k8s-example:latest     создаем деплоймент
