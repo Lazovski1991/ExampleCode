@@ -41,6 +41,7 @@ kubectl get svc                                                                 
 kubectl expose deployment test-deploy --type=ClusterIP --port 8080              создать сервис
 kubectl expose deployment test-deploy --type=LoadBalancer --port 8080           создать сервис 
 kubectl delete service test-deploy                                              удалить сервис
+kubectl port-forward service/postgres-test 5433:5432 -n postgres                проброс порта до сервиса
 
 kubectl get pvc
 
