@@ -1,6 +1,6 @@
-sudo -u postgres psql			                                войти в постгрес
-psql test_db					                                перейти в бд 
-\l								                                список бд
+sudo -u postgres psql			                                      войти в постгрес
+psql test_db					                                          перейти в бд 
+\l								                                              список бд
 passwd postgres                                                 ввести пароль для пользователя postgres
 sudo su postgres                                                войти под пользователем postgres
 psql                                                            запускаем утилиту psql – это консоль для PostgreSQL.
@@ -11,7 +11,7 @@ grant all privileges on database test_db to info_comp;          дать пра�
 psql -h localhost test_db info_comp                             подключится к PostgreSQL от имени нового пользователя
 exit                                                            переключенияе обратно на root,
 DROP DATABASE test_db;                                          удалить бд
-
+\dt                                                             список таблиц в бд
 
 
 
