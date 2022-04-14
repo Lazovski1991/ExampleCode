@@ -21,7 +21,7 @@ docker push имя/имя проета запушить образ в докер
 docker login залогинится в докерхаб
 docker tag apline-openjdk17:latest nelson9291/apline-openjdk17:latest добавить tag для push
 docker push nelson9291/apline-openjdk17:latest пуш на докер хаб
-docker exec -it 714e3488dece psql -U alex зайти в postgres
+docker exec -it b2628a57c74a psql -U alex -d dbname зайти в postgres
 docker exec -it 9a08d631de4a bin/bash
 
 
