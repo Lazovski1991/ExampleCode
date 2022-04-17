@@ -61,3 +61,17 @@ kubectl create namespace test-namespace
 kubectl describe namespaces test-namespace
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
+
+helm version	                                                                            Показать версию Helm
+helm list	                                                                                Показать все задеплоенные Helm Releases
+helm search hub	                                                                          Показать Helm Chart с общего списка Hub
+helm search repo	                                                                        Показать Helm Chart из добавленных Repos
+helm install app1 Denis-Chart/	                                                          Задеплоить Helm Chart app1 из директории Denis-Chart
+helm upgrade app1 Denis-Chart/ --set container.image=adv4000/k8sphp:version2	            Обновить Деплоймент app1
+helm create MyChart	                                                                      Сделать скелет Helm Chart в директории MyChart
+helm package Denis-Chart/	                                                                Запаковать Helm Chart в tgz архив
+helm install app2 App-HelmChart-0.1.0.tgz	                                                Задеплоить Helm Chart app2 из архива
+helm delete app1	                                                                        Удалить Деплоймент Helm Chart app1
+helm uninstall app1	                                                                      Удалить Деплоймент Helm Chart app1
+helm repo add bitnami https://charts.bitnami.com/bitnami	                                Добавить Helm Chart Repo от bitnami
+helm install my_website bitnami/apache -f my_values.yaml	                                Задеплоить Helm Chart bitnami/apache с нашими переменными
