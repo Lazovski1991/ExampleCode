@@ -17,6 +17,9 @@ kubectl run test --image=nelson9291/k8s-example:latest --port=8080              
 kubectl delete pods test                                                        удалить под
 kubectl describe pods test                                                      информация о поде
 kubectl exec -it test sh                                                        зайти в sh на поде
+kubectl exec --stdin --tty postgres-test-0 -- psql -U alex -d review_db         зайти в постгрес
+kubectl exec --stdin --tty postgres-test-0  -- /bin/bash                        зайти в bash
+
 kubeclt logs test                                                               посмотреть логи на поде
 kubeclt port-forward test 8080:8080                                             пробросить порт поды на локальный
 kubectl get nodes -o wide                                                       адреса нод
