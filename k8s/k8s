@@ -5,6 +5,8 @@ gcloud container clusters create cluster-first --num-nodes=2
 gcloud container clusters delete cluster-first
 gcloud container clusters get-credentials cluster-first
 
+kubectl get events                                                             посмотреть события в кластере
+
 kubectl cluster-info                                                            информация о кластере
 kubectl get componentstatuses
 kubectl get nodes                                                               получить список нод на кластере
