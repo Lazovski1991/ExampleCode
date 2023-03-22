@@ -67,6 +67,8 @@ kubectl describe namespaces test-namespace
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
 
+kubectl api-versions | grep autoscaling                                                   показать поддерживаемые апи(тут autoscaling)
+
 helm version	                                                                            Показать версию Helm
 helm list	                                                                                Показать все задеплоенные Helm Releases
 helm search hub	                                                                          Показать Helm Chart с общего списка Hub
@@ -80,3 +82,4 @@ helm delete app1	                                                               
 helm uninstall app1	                                                                      Удалить Деплоймент Helm Chart app1
 helm repo add bitnami https://charts.bitnami.com/bitnami	                                Добавить Helm Chart Repo от bitnami
 helm install my_website bitnami/apache -f my_values.yaml	                                Задеплоить Helm Chart bitnami/apache с нашими переменными
+helm repo update                                                                          Обновить репозитории
